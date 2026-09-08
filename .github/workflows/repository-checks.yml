@@ -1,0 +1,37 @@
+name: Repository checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  bash-syntax:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check Bash syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          find scripts -type f -name '*.sh' -print0 | xargs -0 -n1 bash -n
+
+      - name: Check required public files
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f README.md
+          test -f labs/day-1/TP00-installation/README.md
+          test -f labs/day-2/TP09-final-boss/README.md
+          test -f slides/B3_SRC_26_1_J1_Linux_Fundamentals_V3.pdf
+          test -f slides/B3_SRC_26_1_J2_Linux_Operations_V3.pdf
+
+      - name: Ensure instructor tooling is not published
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! find . -type f \( -name 'break-server.sh' -o -name 'restore-server.sh' -o -name 'check-incident.sh' \) | grep -q .

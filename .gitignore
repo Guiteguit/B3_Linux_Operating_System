@@ -1,0 +1,39 @@
+# Livrables étudiant : rester locaux par défaut
+livrables/*
+!livrables/.gitkeep
+!livrables/README.md
+
+# Éditeurs
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Fichiers temporaires / secrets / clés
+*.log
+*.tmp
+*.bak
+*.key
+*.pem
+*.p12
+*.pfx
+.env
+.env.*
+!.env.example
+
+# Sauvegardes générées pendant les TPs
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.sha256
+
+# VM / hyperviseurs
+*.vdi
+*.vmdk
+*.vhd
+*.vhdx
+*.ova
+*.ovf
+.vagrant/
